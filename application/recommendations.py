@@ -106,7 +106,6 @@ class Recommendation:
         #Store generated song recommendations from model
         with open('data/song_data.json') as json_file:
             song_data = json.load(json_file)
-            print(song_data)
             for ranking_tuple in list_of_tuples:
                 song = song_data[int(ranking_tuple[0])]
                 song['genres'] = [g.title() for g in song['genres']]
