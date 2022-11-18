@@ -57,7 +57,7 @@ def recommendations(artist, title):
     return render_template('whoops.html', title='Song Not Found')
 
 
-@app.route('/recommendations/<lyrics>')
+@app.route('/recommendations_for_lyrics/<lyrics>')
 def recommendationsForLyrics(lyrics):
     rec = Recommendation("","")
     rec.load_recommendations(lyrics)
