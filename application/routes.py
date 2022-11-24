@@ -1,5 +1,5 @@
 """
-This is the main file that groover uses to
+This is the main file that Versaline uses to
 generate recommendations. This file
 communicates and controls other programs in
 the groover application.
@@ -30,14 +30,11 @@ def lookup():
     if (form.artist.data and not form.title.data) or (not form.artist.data and form.title.data):
         flash('Whoops! Please enter both the song name and artist.', category='error')
         return render_template('whoops.html', title='Input error')
-    return render_template('lookup.html', title='Smarter Music Recommendations', form=form)
+    return render_template('lookup.html', title='Versaline', form=form)
 
 @app.route('/about')
 def about():
-    """
-    This will send the user to our about page, with a link
-    to our GitHub
-    """
+  
     return render_template('about.html', title='About')
 
 @app.route('/recommendations/<artist>/<title>')

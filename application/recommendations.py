@@ -8,8 +8,10 @@ import os
 import requests
 from gensim.models.doc2vec import Doc2Vec
 from nltk.tokenize import word_tokenize
+import nltk.data #
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials# Recommendation Generator
+
+from spotipy.oauth2 import SpotifyClientCredentials # Recommendation Generator
 class Recommendation:
     """
     The recommendation class will initialize the song display
@@ -88,8 +90,7 @@ class Recommendation:
         we will use to list recommendations.
         """
         #Clean lyrics for analysis
-        if(lyrics == None):
-            lyrics = self.get_lyrics().strip().replace('\n', ' ').lower()
+        lyrics = self.get_lyrics().strip().replace('\n', ' ').lower()
         
         lyrics = re.sub(r"[\(\[].*?[\)\]]", r"", lyrics)
 

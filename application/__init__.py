@@ -1,5 +1,5 @@
 """
-initializes groover using the Flask library.
+initializes Versaline  using the Flask library.
 
 """
 import os
