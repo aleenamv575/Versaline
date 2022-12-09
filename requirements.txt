@@ -40,3 +40,12 @@ Werkzeug==2.2.2
 wrapt==1.14.1
 WTForms==3.0.1
 zipp==3.10.0
+langdetect
+inltk
+cltk
+pandas
+seaborn
+scikit-learn 
+scipy
+matplotlib
+indicate

@@ -1,5 +1,5 @@
 """
- link- between the python and the static files.
+link- between the python and the static files.
 This file contains the input fields the user
 will use to find the artist and song. Which will
 be passed to the APIs and then our model for

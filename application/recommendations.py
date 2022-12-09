@@ -8,7 +8,7 @@ import os
 import requests
 from gensim.models.doc2vec import Doc2Vec
 from nltk.tokenize import word_tokenize
-import nltk.data #
+import nltk.data 
 import spotipy
 
 from spotipy.oauth2 import SpotifyClientCredentials # Recommendation Generator

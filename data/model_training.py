@@ -1,7 +1,6 @@
 """This script is used to generate a model for lyrically similar songs"""
 
-# NOTE: This code is how we generated our model and is not used actively in our
-# web application -- we load the saved model in the app.
+
 
 # Import all the dependencies
 import csv
@@ -10,7 +9,7 @@ import json
 import spotipy
 from spotipy.oauth2 import SPOTIFYClientCredentials
 
-import requests
+import requests #http
 
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from nltk.tokenize import word_tokenize
@@ -117,7 +116,7 @@ with open('data/SONG_DATA.json') as json_file:
                     total_examples=MODEL.corpus_count,
                     epochs=MODEL.iter)
         MODEL.ALPHA -= 0.0002 #decrease the learning rate
-        MODEL.min_alpha = MODEL.ALPHA #fix the learning rate, no decay
+        MODEL.min_alpha = MODEL.ALPHA #fix the learning rate
 
     MODEL.save("d2v.model")
     print("Model Saved")
