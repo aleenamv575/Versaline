@@ -1,7 +1,7 @@
 # helper class to send the argument to context
 
 class HindiRecommendation:
-    def __init__(self, artist, title, language = "hindi", album_image_url = "", recommendations = {}):
+    def __init__(self, artist , title, language = "hindi", album_image_url = "", recommendations = {}):
         self.artist = artist
         self.song_title = title
         self.language = language

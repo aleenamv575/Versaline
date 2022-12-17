@@ -7,7 +7,7 @@ recommendations. Flask_WTF escapes strings by
 default.
 """
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 
 # Collect artist/title info from user
@@ -18,4 +18,5 @@ class LoginForm(FlaskForm):
     """
     artist = StringField('Artist', validators=[DataRequired()])
     title = StringField('Title', validators=[DataRequired()])
+    language = SelectField('Language', choices = ["hindi", "english"])
     submit = SubmitField('Submit')

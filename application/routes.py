@@ -9,6 +9,7 @@ from application import app
 from application.forms import LoginForm
 from application.recommendations import Recommendation
 from .HindiRecommender import HindiRecommender
+from langdetect import detect
 # from markupsafe import Markup, escape
 
 hindiRecommender = HindiRecommender()
@@ -25,11 +26,17 @@ def lookup():
         if set(form.artist.data).intersection("%^&*()<>?+=") or set(form.title.data).intersection("%^&*()<>?+="):
             flash('Whoops! Please omit special characters.', category='error')
             return render_template('whoops.html', title='error')
+        language = str(form.language.data)
+        print(language)
         artist = str(form.artist.data)
         artist=artist.replace('#','')
         title = str(form.title.data)
         title=title.replace('#','')
-        return redirect('/recommendations/' + artist + '/' +  title)
+        if(language == "hindi"):
+            return redirect('/recommendations/hindi/' + artist + '/' +  title)
+        else:
+            return redirect('/recommendations/' + artist + '/' +  title)
+            
     if (form.artist.data and not form.title.data) or (not form.artist.data and form.title.data):
         flash('Whoops! Please enter both the song name and artist.', category='error')
         return render_template('whoops.html', title='Input error')
@@ -40,8 +47,8 @@ def about():
   
     return render_template('about.html', title='About')
 
-@app.route('/recommendations/<artist>/<title>/<language>')
-def recommendations(artist, title, language):
+@app.route('/recommendations/<artist>/<title>')
+def recommendations(artist, title):
     """
     This method will find our track information using various
     helper functions in the Recommendation class. It will send
@@ -51,22 +58,25 @@ def recommendations(artist, title, language):
     # find language of title using indicate
     # if language is hindi, then use HindiRecommender
     # else user recommendation
+    
+    rec = Recommendation(artist, title)
+    print(rec.find_track_info())
+    if rec.find_track_info()!= False: 
+        rec.load_recommendations()
+        return render_template('recommendations.html', title='Your Recommendations', rec=rec)
+    flash('Whoops, we did not find the track "{}" by {}!'.format(\
+    title, artist), category='error')
+    return render_template('whoops.html', title='Song Not Found')
 
-    if(language == "hindi"):
-        recommendations = hindiRecommender.recommend(artist, title,4)
-        if(recommendations):
-            return render_template('recommendations.html', title='Your Recommendations', rec=recommendations,)
-        else:
-            flash('Whoops, we did not find the track "{}" by {}!'.format(\
-            title, artist), category='error')
-            return render_template('whoops.html', title='Song Not Found')
+
+@app.route('/recommendations/hindi/<artist>/<title>')
+def recommendationsHindi(artist, title):
+    recommendations = hindiRecommender.recommend(artist, title,4)
+    if(recommendations):
+        return render_template('recommendations.html', title='Your Recommendations', rec=recommendations,)
     else:
-        rec = Recommendation(artist, title)
-        if rec.find_track_info():
-            rec.load_recommendations()
-            return render_template('recommendations.html', title='Your Recommendations', rec=rec)
         flash('Whoops, we did not find the track "{}" by {}!'.format(\
         title, artist), category='error')
         return render_template('whoops.html', title='Song Not Found')
-
+    
 

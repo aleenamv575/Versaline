@@ -11,20 +11,30 @@
     <div class="container search">
     <div class="container item">
     <form action="" method="post" autocomplete="off" novalidate>
-        {{ form.hidden_tag() }}
+            {{ form.hidden_tag() }}
             {{ form.title(placeholder='Enter song title') }}
-            {{ form.artist(placeholder='Enter artist name') }} </div>
+            {{ form.language() }} 
+            {{ form.artist(placeholder='Enter artist name') }} 
+            
+            
+          
+            
+        </div>
             <div class="container item">
             <div class="container submit">
+                
               <div class="lds-facebook" id="loading"><div></div><div></div><div></div></div>
             <div class="container item" id="submit-div" onclick="submit()">
             {{ form.submit() }} </div>
+           
             <div class="container item">
             <a href="/about" class="about">  ⓘ How does this work?</a>
             </div>
         </div>
         </div>
     </form>
+
+    
 </div>
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/loading.js')+'?v=1' }}"></script>
